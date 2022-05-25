@@ -71,7 +71,7 @@ var_names_accountants_job_sat <- tibble(
 
 # Dependent variable:     Job Satisfaction
 # Independent variable:   Bookkeeper
-# Control group:          All Professionals
+# Control group:          All Technicians
 
 
 # Get sample
@@ -126,7 +126,7 @@ var_names_bookkeeper_job_sat <- tibble(
 
 # Dependent variable:     Job Satisfaction
 # Independent variable:   Bookkeeper
-# Control group:          All Professionals
+# Control group:          All Clerks
 
 # Get sample
 sample                <- soep_data[as.numeric(substr(soep_data$pgisco88, 1, 1)) %in%  4 | as.numeric(substr(soep_data$pgisco08, 1, 1)) %in%  4,]
