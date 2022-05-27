@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
 library(tidyverse)
 library(kableExtra)
 load("../output/results_big5.rda")
-load("../output/results_job_sat.rda")
+load("../output/results_satisfaction.rda")
 ```
 
 
@@ -37,10 +37,10 @@ load("../output/results_job_sat.rda")
 
 # Who are the individuals that work in accounting?
 
-### Big 5 Personality Traits of Accountants
-``` {r accountantsBig5, results="asis"}
+### Big 5 Personality Traits of Accountants (Control: Professionals)
+``` {r accountantsProfBig5, results="asis"}
 var_names <- var_names_accountants_big5
-tab <- tab_accountant_big5$table
+tab <- tab_acc_prof_YearFE_big5$table
 tab[12] <- paste(
   "\\\\[-1.8ex] &", var_names$label[1], 
   "&", var_names$label[2], 
@@ -50,8 +50,41 @@ tab[12] <- paste(
 )
 esc_var_names <- str_replace_all(var_names$var_name, fixed ("_"), "\\_")
 reg_names <- tibble(
-  var_name = esc_var_names[c(6:11)],
-  label = var_names$label[c(6:11)]
+  var_name = esc_var_names[c(6:10)],
+  label = var_names$label[c(6:10)]
+)
+for (i in seq(15, 27, by = 3)) {
+  pos <- (i-12)/3
+  tab[i] <- str_replace(
+    tab[i], fixed(reg_names$var_name[pos]), reg_names$label[pos]
+  )
+}
+latex_tab <- c(
+  "\\begin{center}",
+  "\\resizebox*{!}{0.8\\textheight}{",
+  "\\begin{tabular}{lccccc}",
+  tab[8:39],
+  "\\end{tabular}}",
+  "\\end{center}"
+)
+cat(paste(latex_tab, collapse = "\n"))
+```
+
+
+### Satisfaction of Accountants (Control: Professionals)
+``` {r accountantsProfSat_YearFE, results="asis"}
+var_names <- var_names_accountants_sat
+tab <- tab_accountant_job_sat_YearFE$table
+tab[12] <- paste(
+  "\\\\[-1.8ex] &", var_names$label[1], 
+  "&", var_names$label[2], 
+  "&", var_names$label[3], 
+  "&", var_names$label[4],"\\\\"
+)
+esc_var_names <- str_replace_all(var_names$var_name, fixed ("_"), "\\_")
+reg_names <- tibble(
+  var_name = esc_var_names[c(5:10)],
+  label = var_names$label[c(5:10)]
 )
 for (i in seq(15, 30, by = 3)) {
   pos <- (i-12)/3
@@ -63,17 +96,19 @@ latex_tab <- c(
   "\\begin{center}",
   "\\resizebox*{!}{0.8\\textheight}{",
   "\\begin{tabular}{lccccc}",
-  tab[8:45],
+  tab[8:39],
   "\\end{tabular}}",
   "\\end{center}"
 )
 cat(paste(latex_tab, collapse = "\n"))
 ```
 
-### Big 5 Personality Traits of Bookkeepers
-``` {r bookkeeperBig5, results="asis"}
-var_names <- var_names_bookkeeper_big5
-tab <- tab_bookkeeper_big5$table
+# What happens after entering the accounting profession?
+
+### Big 5 Personality Traits of Accountants (Control: Professionals)
+``` {r accountantsProfBig5_PersonFE, results="asis"}
+var_names <- var_names_accountants_big5
+tab <- tab_acc_prof_PersonFE_big5$table
 tab[12] <- paste(
   "\\\\[-1.8ex] &", var_names$label[1], 
   "&", var_names$label[2], 
@@ -83,8 +118,41 @@ tab[12] <- paste(
 )
 esc_var_names <- str_replace_all(var_names$var_name, fixed ("_"), "\\_")
 reg_names <- tibble(
-  var_name = esc_var_names[c(6:11)],
-  label = var_names$label[c(6:11)]
+  var_name = esc_var_names[c(6:10)],
+  label = var_names$label[c(6:10)]
+)
+for (i in seq(15, 27, by = 3)) {
+  pos <- (i-12)/3
+  tab[i] <- str_replace(
+    tab[i], fixed(reg_names$var_name[pos]), reg_names$label[pos]
+  )
+}
+latex_tab <- c(
+  "\\begin{center}",
+  "\\resizebox*{!}{0.8\\textheight}{",
+  "\\begin{tabular}{lccccc}",
+  tab[8:39],
+  "\\end{tabular}}",
+  "\\end{center}"
+)
+cat(paste(latex_tab, collapse = "\n"))
+```
+
+
+### Satisfaction of Accountants (Control: Professionals)
+``` {r accountantsProfSat_PersonFE, results="asis"}
+var_names <- var_names_accountants_sat
+tab <- tab_accountant_job_sat_PersonFE$table
+tab[12] <- paste(
+  "\\\\[-1.8ex] &", var_names$label[1], 
+  "&", var_names$label[2], 
+  "&", var_names$label[3], 
+  "&", var_names$label[4],"\\\\"
+)
+esc_var_names <- str_replace_all(var_names$var_name, fixed ("_"), "\\_")
+reg_names <- tibble(
+  var_name = esc_var_names[c(5:10)],
+  label = var_names$label[c(5:10)]
 )
 for (i in seq(15, 30, by = 3)) {
   pos <- (i-12)/3
@@ -96,19 +164,19 @@ latex_tab <- c(
   "\\begin{center}",
   "\\resizebox*{!}{0.8\\textheight}{",
   "\\begin{tabular}{lccccc}",
-  tab[8:45],
+  tab[8:39],
   "\\end{tabular}}",
   "\\end{center}"
 )
 cat(paste(latex_tab, collapse = "\n"))
 ```
 
+# Appendix
 
-
-### Big 5 Personality Traits of Accounting Clerks
-``` {r clerksBig5, results="asis"}
-var_names <- var_names_acc_clerks_big5
-tab <- tab_acc_clerks_big5$table
+### Big 5 Personality Traits of Accountants (Control: Highly Skilled Workers)
+``` {r accountantsSkillBig5, results="asis"}
+var_names <- var_names_accountants_big5
+tab <- tab_acc_skill_YearFE_big5$table
 tab[12] <- paste(
   "\\\\[-1.8ex] &", var_names$label[1], 
   "&", var_names$label[2], 
@@ -118,10 +186,10 @@ tab[12] <- paste(
 )
 esc_var_names <- str_replace_all(var_names$var_name, fixed ("_"), "\\_")
 reg_names <- tibble(
-  var_name = esc_var_names[c(6:11)],
-  label = var_names$label[c(6:11)]
+  var_name = esc_var_names[c(6:10)],
+  label = var_names$label[c(6:10)]
 )
-for (i in seq(15, 30, by = 3)) {
+for (i in seq(15, 27, by = 3)) {
   pos <- (i-12)/3
   tab[i] <- str_replace(
     tab[i], fixed(reg_names$var_name[pos]), reg_names$label[pos]
@@ -131,7 +199,7 @@ latex_tab <- c(
   "\\begin{center}",
   "\\resizebox*{!}{0.8\\textheight}{",
   "\\begin{tabular}{lccccc}",
-  tab[8:45],
+  tab[8:39],
   "\\end{tabular}}",
   "\\end{center}"
 )
@@ -139,21 +207,23 @@ cat(paste(latex_tab, collapse = "\n"))
 ```
 
 
-### Job, Income & Leisure Satisfaction of Accountants
-``` {r accountantsJobSat, results="asis"}
-var_names <- var_names_accountants_job_sat
-tab <- tab_accountant_job_sat$table
+### Big 5 Personality Traits of Accountants (Control: Highly Skilled Workers)
+``` {r accountantsSkillBig5_PersonFE, results="asis"}
+var_names <- var_names_accountants_big5
+tab <- tab_acc_skill_PersonFE_big5$table
 tab[12] <- paste(
   "\\\\[-1.8ex] &", var_names$label[1], 
-  "&", var_names$label[2],
-  "&", var_names$label[3],"\\\\"
+  "&", var_names$label[2], 
+  "&", var_names$label[3], 
+  "&", var_names$label[4],
+  "&", var_names$label[5],"\\\\"
 )
 esc_var_names <- str_replace_all(var_names$var_name, fixed ("_"), "\\_")
 reg_names <- tibble(
-  var_name = esc_var_names[c(4:9)],
-  label = var_names$label[c(4:9)]
+  var_name = esc_var_names[c(6:10)],
+  label = var_names$label[c(6:10)]
 )
-for (i in seq(15, 30, by = 3)) {
+for (i in seq(15, 27, by = 3)) {
   pos <- (i-12)/3
   tab[i] <- str_replace(
     tab[i], fixed(reg_names$var_name[pos]), reg_names$label[pos]
@@ -162,28 +232,34 @@ for (i in seq(15, 30, by = 3)) {
 latex_tab <- c(
   "\\begin{center}",
   "\\resizebox*{!}{0.8\\textheight}{",
-  "\\begin{tabular}{lccc}",
-  tab[8:42],
+  "\\begin{tabular}{lccccc}",
+  tab[8:39],
   "\\end{tabular}}",
   "\\end{center}"
 )
 cat(paste(latex_tab, collapse = "\n"))
 ```
-### Job, Income & Leisure Satisfaction of Bookkeepers
-``` {r bookkeeperJobSat, results="asis"}
-var_names <- var_names_bookkeeper_job_sat
-tab <- tab_bookkeeper_job_sat$table
+
+
+
+
+### Big 5 Personality Traits of Young Accountants (Control: Young Highly Skilled Workers)
+``` {r accountantsYSkillBig5, results="asis"}
+var_names <- var_names_accountants_big5
+tab <- tab_yacc_yskill_YearFE_big5$table
 tab[12] <- paste(
   "\\\\[-1.8ex] &", var_names$label[1], 
-  "&", var_names$label[2],
-  "&", var_names$label[3],"\\\\"
+  "&", var_names$label[2], 
+  "&", var_names$label[3], 
+  "&", var_names$label[4],
+  "&", var_names$label[5],"\\\\"
 )
 esc_var_names <- str_replace_all(var_names$var_name, fixed ("_"), "\\_")
 reg_names <- tibble(
-  var_name = esc_var_names[c(4:9)],
-  label = var_names$label[c(4:9)]
+  var_name = esc_var_names[c(6:10)],
+  label = var_names$label[c(6:10)]
 )
-for (i in seq(15, 30, by = 3)) {
+for (i in seq(15, 27, by = 3)) {
   pos <- (i-12)/3
   tab[i] <- str_replace(
     tab[i], fixed(reg_names$var_name[pos]), reg_names$label[pos]
@@ -192,8 +268,8 @@ for (i in seq(15, 30, by = 3)) {
 latex_tab <- c(
   "\\begin{center}",
   "\\resizebox*{!}{0.8\\textheight}{",
-  "\\begin{tabular}{lccc}",
-  tab[8:42],
+  "\\begin{tabular}{lccccc}",
+  tab[8:39],
   "\\end{tabular}}",
   "\\end{center}"
 )
@@ -201,21 +277,24 @@ cat(paste(latex_tab, collapse = "\n"))
 ```
 
 
-### Job, Income & Leisure Satisfaction of Accounting Clerks
-``` {r clerkJobSat, results="asis"}
-var_names <- var_names_acc_clerk_job_sat
-tab <- tab_acc_clerk_job_sat$table
+
+### Big 5 Personality Traits of Young Accountants (Control: Young Highly Skilled Workers)
+``` {r accountantsYSkillBig5_PersonFE, results="asis"}
+var_names <- var_names_accountants_big5
+tab <- tab_yacc_yskill_PersonFE_big5$table
 tab[12] <- paste(
   "\\\\[-1.8ex] &", var_names$label[1], 
-  "&", var_names$label[2],
-  "&", var_names$label[3],"\\\\"
+  "&", var_names$label[2], 
+  "&", var_names$label[3], 
+  "&", var_names$label[4],
+  "&", var_names$label[5],"\\\\"
 )
 esc_var_names <- str_replace_all(var_names$var_name, fixed ("_"), "\\_")
 reg_names <- tibble(
-  var_name = esc_var_names[c(4:9)],
-  label = var_names$label[c(4:9)]
+  var_name = esc_var_names[c(6:10)],
+  label = var_names$label[c(6:10)]
 )
-for (i in seq(15, 30, by = 3)) {
+for (i in seq(15, 27, by = 3)) {
   pos <- (i-12)/3
   tab[i] <- str_replace(
     tab[i], fixed(reg_names$var_name[pos]), reg_names$label[pos]
@@ -224,21 +303,82 @@ for (i in seq(15, 30, by = 3)) {
 latex_tab <- c(
   "\\begin{center}",
   "\\resizebox*{!}{0.8\\textheight}{",
-  "\\begin{tabular}{lccc}",
-  tab[8:42],
+  "\\begin{tabular}{lccccc}",
+  tab[8:39],
   "\\end{tabular}}",
   "\\end{center}"
 )
 cat(paste(latex_tab, collapse = "\n"))
 ```
 
-# What does working in accounting do to individuals?
-
-### Conclusion
 
 
 
 
+### Big 5 Personality Traits of Accountants, Bookkeepers and Clerks (Control: Full time employed)
+``` {r accountantsBookBig5_YearFE, results="asis"}
+var_names <- var_names_accountants_big5
+tab <- tab_book_lab_YearFE_big5$table
+tab[12] <- paste(
+  "\\\\[-1.8ex] &", var_names$label[1], 
+  "&", var_names$label[2], 
+  "&", var_names$label[3], 
+  "&", var_names$label[4],
+  "&", var_names$label[5],"\\\\"
+)
+esc_var_names <- str_replace_all(var_names$var_name, fixed ("_"), "\\_")
+reg_names <- tibble(
+  var_name = esc_var_names[c(6:10)],
+  label = var_names$label[c(6:10)]
+)
+for (i in seq(15, 27, by = 3)) {
+  pos <- (i-12)/3
+  tab[i] <- str_replace(
+    tab[i], fixed(reg_names$var_name[pos]), reg_names$label[pos]
+  )
+}
+latex_tab <- c(
+  "\\begin{center}",
+  "\\resizebox*{!}{0.8\\textheight}{",
+  "\\begin{tabular}{lccccc}",
+  tab[8:39],
+  "\\end{tabular}}",
+  "\\end{center}"
+)
+cat(paste(latex_tab, collapse = "\n"))
+```
 
 
 
+### Big 5 Personality Traits of Accountants, Bookkeepers and Clerks (Control: Full time employed)
+``` {r accountantsBookBig5_PersonFE, results="asis"}
+var_names <- var_names_accountants_big5
+tab <- tab_book_lab_PersonFE_big5$table
+tab[12] <- paste(
+  "\\\\[-1.8ex] &", var_names$label[1], 
+  "&", var_names$label[2], 
+  "&", var_names$label[3], 
+  "&", var_names$label[4],
+  "&", var_names$label[5],"\\\\"
+)
+esc_var_names <- str_replace_all(var_names$var_name, fixed ("_"), "\\_")
+reg_names <- tibble(
+  var_name = esc_var_names[c(6:10)],
+  label = var_names$label[c(6:10)]
+)
+for (i in seq(15, 27, by = 3)) {
+  pos <- (i-12)/3
+  tab[i] <- str_replace(
+    tab[i], fixed(reg_names$var_name[pos]), reg_names$label[pos]
+  )
+}
+latex_tab <- c(
+  "\\begin{center}",
+  "\\resizebox*{!}{0.8\\textheight}{",
+  "\\begin{tabular}{lccccc}",
+  tab[8:39],
+  "\\end{tabular}}",
+  "\\end{center}"
+)
+cat(paste(latex_tab, collapse = "\n"))
+```

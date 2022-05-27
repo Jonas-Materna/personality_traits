@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 22.3) (preloaded format=xelatex 2022.5.3)  25 MAY 2022 17:19
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 22.3) (preloaded format=xelatex 2022.5.3)  27 MAY 2022 11:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1548,23 +1548,23 @@ File: trr266_logo.eps Graphic file (type eps)
 
 ]
 LaTeX Font Info:    Trying to load font information for OML+cmbrm on input line
- 167.
+ 162.
 
 (C:\Users\maternaj\AppData\Local\Programs\MiKTeX\tex/latex/cmbright\omlcmbrm.fd
 File: omlcmbrm.fd 2005/04/13 v8.1 (WaS)
 )
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 9.00096pt on input line 167.
+(Font)              scaled to size 9.00096pt on input line 162.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.30067pt on input line 167.
+(Font)              scaled to size 6.30067pt on input line 162.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 4.50047pt on input line 167.
+(Font)              scaled to size 4.50047pt on input line 162.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 8.99904pt on input line 167.
+(Font)              scaled to size 8.99904pt on input line 162.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.29932pt on input line 167.
+(Font)              scaled to size 6.29932pt on input line 162.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 4.49951pt on input line 167.
+(Font)              scaled to size 4.49951pt on input line 162.
 
 (C:\Users\maternaj\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
@@ -1587,6 +1587,14 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 
 ] [12
 
+] [13
+
+] [14
+
+] [15
+
+] [16
+
 ]
 \tf@nav=\write5
 \openout5 = `presentation.nav'.
@@ -1603,12 +1611,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 32837 strings out of 410939
- 672362 string characters out of 2822718
- 1137336 words of memory out of 3000000
- 53041 multiletter control sequences out of 15000+600000
+ 32849 strings out of 410939
+ 672455 string characters out of 2822718
+ 1132560 words of memory out of 3000000
+ 53053 multiletter control sequences out of 15000+600000
  472822 words of font info for 71 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  128i,11n,122p,1011b,827s stack positions out of 10000i,1000n,20000p,200000b,80000s
 
-Output written on presentation.pdf (12 pages).
+Output written on presentation.pdf (16 pages).

@@ -9,12 +9,19 @@ biobirth <- read_dta(paste0("data/soep/biobirth.dta"), col_select=c("pid",
 
 pgen <- read_dta(paste0("data/soep/pgen.dta"), col_select=c("pid",
                                                             "syear",
+                                                            
+                                                            #Job indicators
                                                             "pgisco88",
                                                             "pgisco08",
+                                                            "pgemplst",
+                                                            
+                                                            #Information on education
                                                             "pgpsbil",
                                                             "pgpbbil01",
                                                             "pgpbbil02",
                                                             "pgdegree",
+                                                            
+                                                            #Information on job characteristics
                                                             "pgtatzeit",
                                                             "pgvebzeit",
                                                             "pguebstd",
@@ -23,13 +30,15 @@ pgen <- read_dta(paste0("data/soep/pgen.dta"), col_select=c("pid",
                                                             "pglabgro",
                                                             "pgerwzeit"))
 
+
 pl  <- read_dta(paste0("data/soep/pl.dta"), col_select=c("pid",
                                                          "syear",
+                                                         
+                                                         #Gender variables
                                                          "pla0009_v2",
                                                          "pla0009_v3",
-                                                         "plh0173",
-                                                         "plh0176",
-                                                         "plh0178",
+                                                         
+                                                         #Big 5 questions
                                                          "plh0212", 
                                                          "plh0213",
                                                          "plh0214",
@@ -45,12 +54,44 @@ pl  <- read_dta(paste0("data/soep/pl.dta"), col_select=c("pid",
                                                          "plh0224",
                                                          "plh0225",
                                                          "plh0226",
-                                                         "plh0255"))
+                                                         "plh0255",
+                                                         
+                                                         #Information on satisfaction
+                                                         "plb0112",
+                                                         "plh0032",
+                                                         "plh0033",
+                                                         "plh0032",
+                                                         "plh0171",
+                                                         "plh0172",
+                                                         "plh0173",
+                                                         "plh0174",
+                                                         "plh0175",
+                                                         "plh0176",
+                                                         "plh0177",
+                                                         "plh0178",
+                                                         "plh0179",
+                                                         "plh0180",
+                                                         "plh0181",
+                                                         "plh0182",
+                                                         "plh0184",
+                                                         "plh0185",
+                                                         "plh0186",
+                                                         "plh0187",
+                                                         "plh0190"))
 
 
+
+
+
+
+
+# Merge data
 df         <- merge(pgen, pl, by = c("pid", "syear"), all = F)
 df         <- merge(df, biobirth, by = c("pid"), all = F)
+
+# Do some basic cleaning
 df[df<0]   <- NA
+df <- data.frame(lapply(df, function(x) as.numeric(x)))
 rm(pgen, pl, biobirth)
 
 ## Calculate Big 5 personality traits
