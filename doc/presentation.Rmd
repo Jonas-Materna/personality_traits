@@ -26,6 +26,9 @@ library(tidyverse)
 library(kableExtra)
 load("../output/results_big5.rda")
 load("../output/results_satisfaction.rda")
+load("../output/results_job_entrants.rda")
+
+
 ```
 
 
@@ -35,7 +38,118 @@ load("../output/results_satisfaction.rda")
 
 - ...
 
-# Who are the individuals that work in accounting?
+# Who are the individuals that enter accounting?
+
+### Big 5 Personality Traits of People entering Accountancy
+``` {r tab_Big5_YearFE, results="asis"}
+var_names <- var_names_big5
+tab <- tab_Big5_YearFE$table
+tab[12] <- paste(
+  "\\\\[-1.8ex] &", var_names$label[1], 
+  "&", var_names$label[2], 
+  "&", var_names$label[3], 
+  "&", var_names$label[4],
+  "&", var_names$label[5],"\\\\"
+)
+esc_var_names <- str_replace_all(var_names$var_name, fixed ("_"), "\\_")
+reg_names <- tibble(
+  var_name = esc_var_names[c(6:10)],
+  label = var_names$label[c(6:10)]
+)
+for (i in seq(15, 27, by = 3)) {
+  pos <- (i-12)/3
+  tab[i] <- str_replace(
+    tab[i], fixed(reg_names$var_name[pos]), reg_names$label[pos]
+  )
+}
+latex_tab <- c(
+  "\\begin{center}",
+  "\\resizebox*{!}{0.8\\textheight}{",
+  "\\begin{tabular}{lccccc}",
+  tab[8:39],
+  "\\end{tabular}}",
+  "\\end{center}"
+)
+cat(paste(latex_tab, collapse = "\n"))
+```
+
+
+
+
+### Do those traits change after entering accountancy?
+``` {r tab_Big5_PersonFE, results="asis"}
+var_names <- var_names_big5
+tab <- tab_Big5_PersonFE$table
+tab[12] <- paste(
+  "\\\\[-1.8ex] &", var_names$label[1], 
+  "&", var_names$label[2], 
+  "&", var_names$label[3], 
+  "&", var_names$label[4],
+  "&", var_names$label[5],"\\\\"
+)
+esc_var_names <- str_replace_all(var_names$var_name, fixed ("_"), "\\_")
+reg_names <- tibble(
+  var_name = esc_var_names[c(6:10)],
+  label = var_names$label[c(6:10)]
+)
+for (i in seq(15, 27, by = 3)) {
+  pos <- (i-12)/3
+  tab[i] <- str_replace(
+    tab[i], fixed(reg_names$var_name[pos]), reg_names$label[pos]
+  )
+}
+latex_tab <- c(
+  "\\begin{center}",
+  "\\resizebox*{!}{0.8\\textheight}{",
+  "\\begin{tabular}{lccccc}",
+  tab[8:36],
+  "\\end{tabular}}",
+  "\\end{center}"
+)
+cat(paste(latex_tab, collapse = "\n"))
+```
+
+### Do those traits change after entering accountancy?
+```{r fig_big5}
+fig_big5
+```
+
+
+
+### Is openness related to a lower job satidfaction?
+``` {r tab_JobSat_YearFE, results="asis"}
+var_names <- var_names_Job_Sat
+tab <- tab_JobSat_YearFE$table
+tab[12] <- paste(
+  "\\\\[-1.8ex] &", var_names$label[1],"\\\\"
+)
+esc_var_names <- str_replace_all(var_names$var_name, fixed ("_"), "\\_")
+reg_names <- tibble(
+  var_name = esc_var_names[c(2:9)],
+  label = var_names$label[c(2:9)]
+)
+for (i in seq(15, 30, by = 3)) {
+  pos <- (i-12)/3
+  tab[i] <- str_replace(
+    tab[i], fixed(reg_names$var_name[pos]), reg_names$label[pos]
+  )
+}
+latex_tab <- c(
+  "\\begin{center}",
+  "\\resizebox*{!}{0.8\\textheight}{",
+  "\\begin{tabular}{lccccc}",
+  tab[8:42],
+  "\\end{tabular}}",
+  "\\end{center}"
+)
+cat(paste(latex_tab, collapse = "\n"))
+```
+
+
+
+
+
+# Appendix
 
 ### Big 5 Personality Traits of Accountants (Control: Professionals)
 ``` {r accountantsProfBig5, results="asis"}
@@ -171,7 +285,7 @@ latex_tab <- c(
 cat(paste(latex_tab, collapse = "\n"))
 ```
 
-# Appendix
+
 
 ### Big 5 Personality Traits of Accountants (Control: Highly Skilled Workers)
 ``` {r accountantsSkillBig5, results="asis"}

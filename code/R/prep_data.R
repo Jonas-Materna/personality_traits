@@ -5,7 +5,8 @@ library(stats)
 
 ## Load needed data
 biobirth <- read_dta(paste0("data/soep/biobirth.dta"), col_select=c("pid",
-                                                                    "gebjahr"))
+                                                                    "gebjahr",
+                                                                    "sex"))
 
 pgen <- read_dta(paste0("data/soep/pgen.dta"), col_select=c("pid",
                                                             "syear",
@@ -92,7 +93,7 @@ df         <- merge(df, biobirth, by = c("pid"), all = F)
 # Do some basic cleaning
 df[df<0]   <- NA
 df <- data.frame(lapply(df, function(x) as.numeric(x)))
-rm(pgen, pl, biobirth)
+rm(pl,pgen,biobirth)
 
 ## Calculate Big 5 personality traits
 
@@ -131,8 +132,8 @@ df$neuro <- (df$plh0216 + df$plh0221 + (8-df$plh0226)) / 3
 
 
 # Get gender
-df$female                    <- df$pla0009_v2 == 2  | df$pla0009_v3 == 2
-df$female[is.na(df$female)]  <- FALSE
+df$female <- df$sex ==2
+
 
 
 # Get age
