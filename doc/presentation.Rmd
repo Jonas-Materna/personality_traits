@@ -116,7 +116,7 @@ fig_big5
 
 
 
-### Is openness related to a lower job satidfaction?
+### Is openness related to a lower job satisfaction?
 ``` {r tab_JobSat_YearFE, results="asis"}
 var_names <- var_names_Job_Sat
 tab <- tab_JobSat_YearFE$table
