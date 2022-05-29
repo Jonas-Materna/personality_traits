@@ -8,13 +8,23 @@ biobirth <- read_dta(paste0("data/soep/biobirth.dta"), col_select=c("pid",
                                                                     "gebjahr",
                                                                     "sex"))
 
+biojob    <- read_dta(paste0("data/soep/biojob.dta"), col_select=c("pid",
+                                                                   "einstieg_artk"))
+
 pgen <- read_dta(paste0("data/soep/pgen.dta"), col_select=c("pid",
                                                             "syear",
+                                                            
+                                                            #Marriage
+                                                            "pgfamstd",
+                                                            
+                                                            #Nationality
+                                                            "pgnation",
                                                             
                                                             #Job indicators
                                                             "pgisco88",
                                                             "pgisco08",
                                                             "pgemplst",
+                                                            "pglfs",
                                                             
                                                             #Information on education
                                                             "pgpsbil",
@@ -57,6 +67,9 @@ pl  <- read_dta(paste0("data/soep/pl.dta"), col_select=c("pid",
                                                          "plh0226",
                                                          "plh0255",
                                                          
+                                                         #Risk tolerance
+                                                         "plh0204_h",
+                                                         
                                                          #Information on satisfaction
                                                          "plb0112",
                                                          "plh0032",
@@ -82,18 +95,22 @@ pl  <- read_dta(paste0("data/soep/pl.dta"), col_select=c("pid",
 
 
 
-
+ppathl  <- read_dta(paste0("data/soep/ppathl.dta"), col_select=c("pid",
+                                                                 "syear",
+                                                                 "phrf"))
 
 
 
 # Merge data
 df         <- merge(pgen, pl, by = c("pid", "syear"), all = F)
+df         <- merge(df, biojob, by = c("pid"), all = F)
 df         <- merge(df, biobirth, by = c("pid"), all = F)
+df         <- merge(df, ppathl, by = c("pid", "syear"), all = F)
 
 # Do some basic cleaning
 df[df<0]   <- NA
 df <- data.frame(lapply(df, function(x) as.numeric(x)))
-rm(pl,pgen,biobirth)
+rm(ppathl,pl,pgen,biobirth, biojob)
 
 ## Calculate Big 5 personality traits
 
@@ -132,17 +149,22 @@ df$neuro <- (df$plh0216 + df$plh0221 + (8-df$plh0226)) / 3
 
 
 # Get gender
-df$female <- df$sex ==2
+df$female <- df$sex == 2
 
-
+# Marriage status 
+df$married <- df$pgfamstd == 1
 
 # Get age
 df$age                       <- df$syear - df$gebjahr 
-
  
 # Get higher education
 df$higher_edu                       <- df$pgpbbil02 %in% c(1:10)
 df$higher_edu[is.na(df$higher_edu)] <- FALSE
+
+
+#Generate log wage
+df$pglabgro[df$pglabgro==0] <- NA
+df$log_wage       <- log(df$pglabgro)
 
 soep_data <- df
 saveRDS(soep_data, "data/generated/soep_data.rds")

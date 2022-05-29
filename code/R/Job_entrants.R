@@ -27,7 +27,7 @@ highly_skilled    <- unique(soep_data$pid[soep_data$pgstib %in% c("530","540","5
 # Get people entereing the full time workforce within the sample period
 entrants          <- unique(soep_data$pid[soep_data$einstieg_artk == soep_data$syear & soep_data$pgemplst == 1])
 
-# Get a sample of highly skilled employes entering the workforce
+# Get a sample of highly skilled employees entering the workforce
 sample            <- highly_skilled[highly_skilled %in% entrants]
 sample            <- soep_data[soep_data$pid %in% sample,]
 
@@ -94,12 +94,13 @@ mean(sample$plh0173[sample$entered_acc==F & sample$high_openn==F], na.rm=T)
 
 tab_JobSat_YearFE <-  prepare_regression_table(
   sample,
-  dvs = "plh0173",
-  idvs = 
-    c("entered_acc","high_openn" ,"high_openn_acc", "age", "higher_edu", "log_wage", "pgtatzeit")
-  ,
-  feffects = "syear",
-  cluster = "syear",
+  dvs = c("plh0173", "plh0173"),
+  idvs = list(
+    c("entered_acc","high_openn" ,"high_openn_acc", "age", "higher_edu", "log_wage", "pgtatzeit"),
+  c("entered_acc","high_openn" ,"high_openn_acc", "age", "higher_edu", "log_wage", "pgtatzeit")
+  ),
+  feffects = list(c("syear"),c("pid")),
+  cluster = list(c("syear"),c("pid")),
   format = "latex"
 )
 
@@ -206,5 +207,42 @@ save(
 
 
 
+neuro <- data.frame(neuro=sample$neuro[!is.na(sample$neuro)]
+                    , syear =sample$syear[!is.na(sample$neuro)],
+                    entry =sample$einstieg_artk[!is.na(sample$neuro)],
+                    accountant = sample$accountant[!is.na(sample$neuro)])
+neuro$dist  <-neuro$syear-neuro$entry
+
+ggplot(neuro, aes(x=dist, y=neuro, color=accountant)) +
+  geom_point() +
+  geom_smooth()
 
 
+
+consc <- data.frame(consc=sample$consc[!is.na(sample$consc)]
+                    , syear =sample$syear[!is.na(sample$consc)],
+                    entry =sample$einstieg_artk[!is.na(sample$consc)],
+                    accountant = sample$accountant[!is.na(sample$consc)])
+consc$dist  <-consc$syear-consc$entry
+
+ggplot(consc, aes(x=dist, y=consc, color=accountant)) +
+  geom_point() +
+  geom_smooth()
+
+
+
+agree <- data.frame(agree=sample$agree[!is.na(sample$agree)]
+                    , syear =sample$syear[!is.na(sample$agree)],
+                    entry =sample$einstieg_artk[!is.na(sample$agree)],
+                    accountant = sample$accountant[!is.na(sample$agree)])
+agree$dist  <-agree$syear-agree$entry
+
+ggplot(agree, aes(x=dist, y=agree, color=accountant)) +
+  geom_point() +
+  geom_smooth()
+
+
+
+
+
+acc_complete <- acc[complete.cases(acc[,c("consc","extra", "agree", "openn","neuro")]),]
