@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 22.3) (preloaded format=xelatex 2022.5.3)  28 MAY 2022 10:57
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 22.3) (preloaded format=xelatex 2022.5.3)  30 MAY 2022 17:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1208,30 +1208,29 @@ LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
 (Font)                  OT1/lmss/bx/n --> TU/Calibri(1)/bx/n on input line 19.
 \logosizesmall=\dimen326
 Package hyperref Info: Option `colorlinks' set `true' on input line 96.
-)
-No file presentation.aux.
+) (presentation.aux)
 \openout1 = `presentation.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 116.
-LaTeX Font Info:    ... okay on input line 116.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 116.
-LaTeX Font Info:    ... okay on input line 116.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 116.
-LaTeX Font Info:    ... okay on input line 116.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 116.
-LaTeX Font Info:    ... okay on input line 116.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 116.
-LaTeX Font Info:    ... okay on input line 116.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 116.
-LaTeX Font Info:    ... okay on input line 116.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 116.
-LaTeX Font Info:    ... okay on input line 116.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 116.
-LaTeX Font Info:    ... okay on input line 116.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 116.
-LaTeX Font Info:    ... okay on input line 116.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 116.
-LaTeX Font Info:    ... okay on input line 116.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 103.
+LaTeX Font Info:    ... okay on input line 103.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 103.
+LaTeX Font Info:    ... okay on input line 103.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 103.
+LaTeX Font Info:    ... okay on input line 103.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 103.
+LaTeX Font Info:    ... okay on input line 103.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 103.
+LaTeX Font Info:    ... okay on input line 103.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 103.
+LaTeX Font Info:    ... okay on input line 103.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 103.
+LaTeX Font Info:    ... okay on input line 103.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 103.
+LaTeX Font Info:    ... okay on input line 103.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 103.
+LaTeX Font Info:    ... okay on input line 103.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 103.
+LaTeX Font Info:    ... okay on input line 103.
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -1266,7 +1265,7 @@ LaTeX Font Info:    ... okay on input line 116.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 116.
+Package hyperref Info: Link coloring ON on input line 103.
 
 (C:\Users\maternaj\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
@@ -1281,12 +1280,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count375
 )
-LaTeX Info: Redefining \ref on input line 116.
-LaTeX Info: Redefining \pageref on input line 116.
-LaTeX Info: Redefining \nameref on input line 116.
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
-
+LaTeX Info: Redefining \ref on input line 103.
+LaTeX Info: Redefining \pageref on input line 103.
+LaTeX Info: Redefining \nameref on input line 103.
 
 (C:\Users\maternaj\AppData\Local\Programs\MiKTeX\tex/latex/translator\translato
 r-basic-dictionary-English.dict
@@ -1313,15 +1309,15 @@ r-theorem-dictionary-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 )
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/cmbr/m/n --> TU/lmr/m/n on input line 116.
+(Font)                  OT1/cmbr/m/n --> TU/lmr/m/n on input line 103.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmbr/m/sl --> TU/lmr/m/it on input line 116.
+(Font)                  OT1/cmbr/m/sl --> TU/lmr/m/it on input line 103.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmbr/bx/n --> TU/lmr/bx/n on input line 116.
+(Font)                  OT1/cmbr/bx/n --> TU/lmr/bx/n on input line 103.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtl/m/n --> TU/cmtl/m/n on input line 116.
+(Font)                  OT1/cmtl/m/n --> TU/cmtl/m/n on input line 103.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtl/m/n --> TU/cmtl/bx/n on input line 116.
+(Font)                  OT1/cmtl/m/n --> TU/cmtl/bx/n on input line 103.
 
 Package fontspec Info: Font family 'latinmodern-math.otf(0)' created for font
 (fontspec)             'latinmodern-math.otf' with options
@@ -1363,16 +1359,16 @@ mapping=tex-text;"
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 116.
+(Font)              `operators' in the math version `normal' on input line 103.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmbr/m/n --> TU/latinmodern-math.otf(1)/m/n on inpu
-t line 116.
+t line 103.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 116.
+(Font)              `operators' in the math version `bold' on input line 103.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  OT1/cmbr/m/n --> TU/latinmodern-math.otf(1)/b/n on inpu
-t line 116.
+t line 103.
 
 Package fontspec Info: latinmodern-math scale = 1.0001.
 
@@ -1444,15 +1440,15 @@ uage=dflt;mapping=tex-text;"
 (fontspec)             =0pt\relax \fontdimen 21\font =0pt\relax 
 
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `normal' on input line 116.
+(Font)              `symbols' in the math version `normal' on input line 103.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
 (Font)                  OMS/cmbrs/m/n --> TU/latinmodern-math.otf(2)/m/n on inp
-ut line 116.
+ut line 103.
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `bold' on input line 116.
+(Font)              `symbols' in the math version `bold' on input line 103.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
 (Font)                  OMS/cmbrs/m/n --> TU/latinmodern-math.otf(2)/b/n on inp
-ut line 116.
+ut line 103.
 
 Package fontspec Info: latinmodern-math scale = 0.9999.
 
@@ -1507,22 +1503,22 @@ uage=dflt;mapping=tex-text;"
 
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
 (Font)              `largesymbols' in the math version `normal' on input line 1
-16.
+03.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
 (Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/m/n on inpu
-t line 116.
+t line 103.
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
-(Font)              `largesymbols' in the math version `bold' on input line 116
+(Font)              `largesymbols' in the math version `bold' on input line 103
 .
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
 (Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/b/n on inpu
-t line 116.
-LaTeX Info: Redefining \microtypecontext on input line 116.
-Package microtype Info: Applying patch `item' on input line 116.
-Package microtype Info: Applying patch `toc' on input line 116.
-Package microtype Info: Applying patch `eqnum' on input line 116.
+t line 103.
+LaTeX Info: Redefining \microtypecontext on input line 103.
+Package microtype Info: Applying patch `item' on input line 103.
+Package microtype Info: Applying patch `toc' on input line 103.
+Package microtype Info: Applying patch `eqnum' on input line 103.
 
-Package microtype Warning: Unable to apply patch `footnote' on input line 116.
+Package microtype Warning: Unable to apply patch `footnote' on input line 103.
 
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
@@ -1533,13 +1529,13 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `Calibri' (encoding: TU).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-No file presentation.nav.
-Invalid UTF-8 byte or sequence at line 117 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 117 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 117 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 117 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 117 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 117 replaced by U+FFFD.
+(presentation.nav)
+Invalid UTF-8 byte or sequence at line 104 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 104 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 104 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 104 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 104 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 104 replaced by U+FFFD.
 File: trr266_logo.eps Graphic file (type eps)
 <trr266_logo.eps>
 [1
@@ -1550,47 +1546,53 @@ File: trr266_logo.eps Graphic file (type eps)
 
 ] [4
 
+] [5
+
 ]
 LaTeX Font Info:    Trying to load font information for OML+cmbrm on input line
- 174.
+ 167.
 
 (C:\Users\maternaj\AppData\Local\Programs\MiKTeX\tex/latex/cmbright\omlcmbrm.fd
 File: omlcmbrm.fd 2005/04/13 v8.1 (WaS)
 )
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 9.00096pt on input line 174.
+(Font)              scaled to size 9.00096pt on input line 167.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.30067pt on input line 174.
+(Font)              scaled to size 6.30067pt on input line 167.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 4.50047pt on input line 174.
+(Font)              scaled to size 4.50047pt on input line 167.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 8.99904pt on input line 174.
+(Font)              scaled to size 8.99904pt on input line 167.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.29932pt on input line 174.
+(Font)              scaled to size 6.29932pt on input line 167.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 4.49951pt on input line 174.
+(Font)              scaled to size 4.49951pt on input line 167.
 
 (C:\Users\maternaj\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
 (C:\Users\maternaj\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
-) [5
-
-]
-Overfull \hbox (0.802pt too wide) in paragraph at lines 212--212
+)
+Overfull \hbox (1.80342pt too wide) in paragraph at lines 167--167
  [] 
  []
 
 
-Overfull \vbox (5.60843pt too high) detected at line 212
+Overfull \vbox (5.60843pt too high) detected at line 167
  []
 
 [6
 
 ]
-File: presentation_files/figure-beamer/fig_big5-1.pdf Graphic file (type pdf)
-<use presentation_files/figure-beamer/fig_big5-1.pdf>
+Overfull \hbox (1.80342pt too wide) in paragraph at lines 205--205
+ [] 
+ []
+
+
+Overfull \vbox (5.60843pt too high) detected at line 205
+ []
+
 [7
 
 ] [8
@@ -1604,22 +1606,38 @@ File: presentation_files/figure-beamer/fig_big5-1.pdf Graphic file (type pdf)
 ] [12
 
 ]
+Overfull \hbox (1.80342pt too wide) in paragraph at lines 399--399
+ [] 
+ []
 
-! LaTeX Error: Something's wrong--perhaps a missing \item.
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.393 \end{frame}
-                  
+Overfull \vbox (5.60843pt too high) detected at line 399
+ []
+
+[13
+
+]
+\tf@nav=\write5
+\openout5 = `presentation.nav'.
+
+\tf@toc=\write6
+\openout6 = `presentation.toc'.
+
+\tf@snm=\write7
+\openout7 = `presentation.snm'.
+
+(presentation.aux)
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+ ) 
 Here is how much of TeX's memory you used:
- 32806 strings out of 410939
- 672576 string characters out of 2822718
- 1130743 words of memory out of 3000000
- 53014 multiletter control sequences out of 15000+600000
+ 32837 strings out of 410939
+ 672364 string characters out of 2822718
+ 1130392 words of memory out of 3000000
+ 53041 multiletter control sequences out of 15000+600000
  472822 words of font info for 71 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  128i,11n,122p,1011b,827s stack positions out of 10000i,1000n,20000p,200000b,80000s
 
-Output written on presentation.pdf (12 pages).
+Output written on presentation.pdf (13 pages).

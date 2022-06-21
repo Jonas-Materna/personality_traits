@@ -1,6 +1,7 @@
 
 library(dplyr)
 library(ExPanDaR)
+library(tidyr)
 
 soep_data <- readRDS("data/generated/soep_data.rds")
 
