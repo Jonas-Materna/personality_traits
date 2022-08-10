@@ -1,5 +1,5 @@
 ---
-title: "Personality Traits of Current and Future Accountants: Evidence from the Socio-Economic Panel"
+title: "Personality, Values and Careers-Success of Accountants: Evidence from the Socio-Economic Panel"
 author: "Ulf Brüggemann & Jonas Materna"
 institute: "TRR 266 Accounting for Transparency"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
@@ -31,23 +31,10 @@ load("../output/results.rda")
 ```
 
 
-# Intro
-
-### Short intro to the SOEP
-
-   
-
-# Big 5 Personality traits of Accountants
-### Big 5 Personality traits of Accountants: Agreeableness
-- Am sometimes too coarse with others   
-- Able to forgive                      
-- Friendly with others  
-
-
-### Big 5 Personality Traits of Accountants (Control: Professionals)
-``` {r tab_big5_1, results="asis"}
+### Big 5 Personality Slide
+``` {r tab_big5, results="asis"}
 var_names <- var_names_big5
-tab <- tab_big5_1$table
+tab <- reg_big5$table
 tab[12] <- paste(
   "\\\\[-1.8ex] &", var_names$label[1], 
   "&", var_names$label[2], 
@@ -57,10 +44,10 @@ tab[12] <- paste(
 )
 esc_var_names <- str_replace_all(var_names$var_name, fixed ("_"), "\\_")
 reg_names <- tibble(
-  var_name = esc_var_names[c(6:10)],
-  label = var_names$label[c(6:10)]
+  var_name = esc_var_names[c(6:8)],
+  label = var_names$label[c(6:8)]
 )
-for (i in seq(15, 27, by = 3)) {
+for (i in seq(15, 21, by = 3)) {
   pos <- (i-12)/3
   tab[i] <- str_replace(
     tab[i], fixed(reg_names$var_name[pos]), reg_names$label[pos]
@@ -68,71 +55,9 @@ for (i in seq(15, 27, by = 3)) {
 }
 latex_tab <- c(
   "\\begin{center}",
-  "\\resizebox*{!}{0.8\\textheight}{",
+  "\\resizebox*{!}{0.5\\textheight}{",
   "\\begin{tabular}{lccccc}",
-  tab[8:36],
-  "\\end{tabular}}",
-  "\\end{center}"
-)
-cat(paste(latex_tab, collapse = "\n"))
-```
-### Big 5 Personality Traits of Accountants (Control: All)
-``` {r tab_big5_2, results="asis"}
-var_names <- var_names_big5
-tab <- tab_big5_2$table
-tab[12] <- paste(
-  "\\\\[-1.8ex] &", var_names$label[1], 
-  "&", var_names$label[2], 
-  "&", var_names$label[3], 
-  "&", var_names$label[4],
-  "&", var_names$label[5],"\\\\"
-)
-esc_var_names <- str_replace_all(var_names$var_name, fixed ("_"), "\\_")
-reg_names <- tibble(
-  var_name = esc_var_names[c(6:10)],
-  label = var_names$label[c(6:10)]
-)
-for (i in seq(15, 27, by = 3)) {
-  pos <- (i-12)/3
-  tab[i] <- str_replace(
-    tab[i], fixed(reg_names$var_name[pos]), reg_names$label[pos]
-  )
-}
-latex_tab <- c(
-  "\\begin{center}",
-  "\\resizebox*{!}{0.8\\textheight}{",
-  "\\begin{tabular}{lccccc}",
-  tab[8:36],
-  "\\end{tabular}}",
-  "\\end{center}"
-)
-cat(paste(latex_tab, collapse = "\n"))
-```
-
-### Satisfaction measures 
-``` {r tab_sat_1, results="asis"}
-var_names <- var_names_sat
-tab <- tab_sat_1$table
-tab[12] <- paste(
-  "\\\\[-1.8ex] &", var_names$label[1], 
-  "&", var_names$label[2], "\\\\"
-)
-esc_var_names <- str_replace_all(var_names$var_name, fixed ("_"), "\\_")
-reg_names <- tibble(
-  var_name = esc_var_names[c(3:15)],
-  label = var_names$label[c(3:15)]
-)
-for (i in seq(15, 45, by = 3)) {
-  pos <- (i-12)/3
-  tab[i] <- str_replace(
-    tab[i], fixed(reg_names$var_name[pos]), reg_names$label[pos]
-  )
-}
-latex_tab <- c(
-  "\\begin{center}",
-  "\\resizebox*{!}{0.8\\textheight}{",
-  "\\begin{tabular}{lccccc}",
-  tab[8:27],
+  tab[8:33],
   "\\end{tabular}}",
   "\\end{center}"
 )
@@ -140,18 +65,22 @@ cat(paste(latex_tab, collapse = "\n"))
 ```
 
 
-### Satisfaction measures 
-``` {r tab_sat_2, results="asis"}
-var_names <- var_names_sat_control_only
-tab <- tab_sat_2$table
+
+### Climate Slide
+``` {r tab_climate, results="asis"}
+var_names <- var_names_climate
+tab <- reg_climate$table
 tab[12] <- paste(
   "\\\\[-1.8ex] &", var_names$label[1], 
-  "&", var_names$label[2], "\\\\"
+  "&", var_names$label[1], 
+  "&", var_names$label[1],
+  "&", var_names$label[1],
+  "\\\\"
 )
 esc_var_names <- str_replace_all(var_names$var_name, fixed ("_"), "\\_")
 reg_names <- tibble(
-  var_name = esc_var_names[c(3:8)],
-  label = var_names$label[c(3:8)]
+  var_name = esc_var_names[c(2:7)],
+  label = var_names$label[c(2:7)]
 )
 for (i in seq(15, 30, by = 3)) {
   pos <- (i-12)/3
@@ -171,18 +100,21 @@ cat(paste(latex_tab, collapse = "\n"))
 ```
 
 
-### Satisfaction measures 
-``` {r tab_sat_3, results="asis"}
-var_names <- var_names_sat
-tab <- tab_sat_3$table
+### Crime Slide
+``` {r tab_crime, results="asis"}
+var_names <- var_names_crime
+tab <- reg_crime$table
 tab[12] <- paste(
   "\\\\[-1.8ex] &", var_names$label[1], 
-  "&", var_names$label[2], "\\\\"
+  "&", var_names$label[1], 
+  "&", var_names$label[1],
+  "&", var_names$label[1],
+  "\\\\"
 )
 esc_var_names <- str_replace_all(var_names$var_name, fixed ("_"), "\\_")
 reg_names <- tibble(
-  var_name = esc_var_names[c(3:13)],
-  label = var_names$label[c(3:13)]
+  var_name = esc_var_names[c(2:7)],
+  label = var_names$label[c(2:7)]
 )
 for (i in seq(15, 30, by = 3)) {
   pos <- (i-12)/3
@@ -199,28 +131,56 @@ latex_tab <- c(
   "\\end{center}"
 )
 cat(paste(latex_tab, collapse = "\n"))
-
-
-``` 
-
+```
 
 
 
-### Determinants of job satisfaction
-
-
-``` {r tab_sat_pid_FE, results="asis"}
-var_names <- var_sat_pid_FE
-tab <- tab_sat_pid_FE$table
+### Leadership
+``` {r tab_job_leadership, results="asis"}
+var_names <- var_names_leader
+tab <- reg_leader$table
 tab[12] <- paste(
-  "\\\\[-1.8ex] &", var_names$label[1],"\\\\"
+  "\\\\[-1.8ex] &", var_names$label[1],"&", var_names$label[1],"&", var_names$label[1],
+  "\\\\"
 )
 esc_var_names <- str_replace_all(var_names$var_name, fixed ("_"), "\\_")
 reg_names <- tibble(
-  var_name = esc_var_names[c(2:5)],
-  label = var_names$label[c(2:5)]
+  var_name = esc_var_names[c(2:11)],
+  label = var_names$label[c(2:11)]
 )
-for (i in seq(14, 23, by = 3)) {
+for (i in seq(15, 39, by = 3)) {
+  pos <- (i-12)/3
+  tab[i] <- str_replace(
+    tab[i], fixed(reg_names$var_name[pos]), reg_names$label[pos]
+  )
+}
+latex_tab <- c(
+  "\\begin{center}",
+  "\\resizebox*{!}{0.8\\textheight}{",
+  "\\begin{tabular}{lccccc}",
+  tab[8:51],
+  "\\end{tabular}}",
+  "\\end{center}"
+)
+cat(paste(latex_tab, collapse = "\n"))
+```
+
+
+
+### Leadership Accountants
+``` {r tab_job_leadership_acc, results="asis"}
+var_names <- var_names_leader_acc
+tab <- reg_leader_acc$table
+tab[12] <- paste(
+  "\\\\[-1.8ex] &", var_names$label[1],
+  "\\\\"
+)
+esc_var_names <- str_replace_all(var_names$var_name, fixed ("_"), "\\_")
+reg_names <- tibble(
+  var_name = esc_var_names[c(2:11)],
+  label = var_names$label[c(2:11)]
+)
+for (i in seq(14, 36, by = 3)) {
   pos <- (i-11)/3
   tab[i] <- str_replace(
     tab[i], fixed(reg_names$var_name[pos]), reg_names$label[pos]
@@ -230,48 +190,39 @@ latex_tab <- c(
   "\\begin{center}",
   "\\resizebox*{!}{0.8\\textheight}{",
   "\\begin{tabular}{lccccc}",
-  tab[8:35],
+  tab[8:50],
   "\\end{tabular}}",
   "\\end{center}"
 )
 cat(paste(latex_tab, collapse = "\n"))
 ```
 
-# Appendix
-``` {r draft, results="asis"}
+
+
+### Leadership Business Professionals
+``` {r tab_job_leadership_bus, results="asis"}
+var_names <- var_names_leader_bus
+tab <- reg_leader_bus$table
+tab[12] <- paste(
+  "\\\\[-1.8ex] &", var_names$label[1],
+  "\\\\"
+)
+esc_var_names <- str_replace_all(var_names$var_name, fixed ("_"), "\\_")
+reg_names <- tibble(
+  var_name = esc_var_names[c(2:11)],
+  label = var_names$label[c(2:11)]
+)
+for (i in seq(14, 36, by = 3)) {
+  pos <- (i-11)/3
+  tab[i] <- str_replace(
+    tab[i], fixed(reg_names$var_name[pos]), reg_names$label[pos]
+  )
+}
 latex_tab <- c(
-  " \\begin{center}",
-  " \\resizebox*{!}{0.8\\textheight}{",
-  " \\begin{tabular}{lcccccc}",
- " \\\\[-1.8ex]\\hline "  ,                                                                                             
-  " \\hline \\\\[-1.8ex] "    ,                                                                                          
- " & \\multicolumn{5}{c}{\\textit{Dependent variable:}} \\\\ "  ,                                                      
- " \\cline{2-6} "             ,                                                                                         
- " \\\\[-1.8ex] & Agreeableness & Conscientiousness & Extraversion & Neuroticism & Openness \\\\"  ,                    
- " \\\\[-1.8ex] & (1) & (2) & (3) & (4) & (5)\\\\ "                                                 ,                   
- " \\hline \\\\[-1.8ex] "  ,                                                                                            
- " Sample (1 = Accountant) & $-$0.108$^{**}$ & 0.082$^{*}$ & $-$0.022 & $-$0.248$^{***}$ & $-$0.133$^{**}$ \\\\ "  ,   
- "  & (0.049) & (0.045) & (0.060) & (0.063) & (0.064) \\\\ "                                                        ,  
-"  & & & & & \\\\ "                                                                                                  ,
- " Gender (1 = Female) & 0.271$^{***}$ & 0.092$^{***}$ & 0.170$^{***}$ & 0.540$^{***}$ & 0.124$^{***}$ \\\\ "         ,
- "  & (0.007) & (0.007) & (0.009) & (0.009) & (0.010) \\\\ "                                                          ,
- "  & & & & & \\\\ "                                                                                                  ,
- " German (1 = True) & $-$0.471$^{***}$ & $-$0.307$^{***}$ & $-$0.208$^{***}$ & 0.033$^{**}$ & $-$0.299$^{***}$ \\\\ ",
-"  & (0.011) & (0.010) & (0.014) & (0.014) & (0.014) \\\\ "                                                          ,
- "  & & & & & \\\\ "                                                                                                  ,
- " Constant & 5.733$^{***}$ & 5.965$^{***}$ & 5.024$^{***}$ & 3.467$^{***}$ & 4.834$^{***}$ \\\\ "                    ,
- "  & (0.011) & (0.010) & (0.013) & (0.014) & (0.014) \\\\ "                                                          ,
- "  & & & & & \\\\ "                                                                                                  ,
- "\\hline \\\\[-1.8ex] "                                                                                              ,
- "Estimator & ols & ols & ols & ols & ols \\\\ "                                                                      ,
- "Fixed effects & None & None & None & None & None \\\\ "                                                             ,
- "Std. errors clustered & No & No & No & No & No \\\\ "                                                               ,
- "Observations & 57,480 & 51,398 & 57,384 & 57,477 & 57,116 \\\\ "                                                    ,
- "$R^{2}$ & 0.050 & 0.019 & 0.010 & 0.054 & 0.010 \\\\ "                                                              ,
- "Adjusted $R^{2}$ & 0.050 & 0.019 & 0.010 & 0.054 & 0.010 \\\\ "                                                     ,
- "\\hline "                                                                                                           ,
- "\\hline \\\\[-1.8ex] "                                                                                              ,
- "\\textit{Note:}  & \\multicolumn{5}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\\\ " ,
+  "\\begin{center}",
+  "\\resizebox*{!}{0.8\\textheight}{",
+  "\\begin{tabular}{lccccc}",
+  tab[8:50],
   "\\end{tabular}}",
   "\\end{center}"
 )

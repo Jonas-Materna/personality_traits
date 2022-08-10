@@ -1,0 +1,458 @@
+---
+title: "Perceived and actual job insecurity"
+author: Jonas Materna
+date: "28/06/2022"
+output:
+  pdf_document: default
+  html_document: default
+---
+  
+```{r setUp, include=FALSE, warning=FALSE}
+
+#Load needed packages
+library(tidyverse)
+library(haven)
+library(ggplot2)
+library(writexl)
+library(reshape)
+
+
+ft <- function(x, digits = 1) {
+  format(round(x, digits), big.mark = ".", decimal.mark = ",", scientific = FALSE)
+}
+```
+
+```{r loadData, echo= FALSE, include=FALSE, warning=FALSE}
+soep_data <- readRDS("C:/Users/maternaj/Documents/TRR/A10/Code/personality_traits/data/generated/soep_data.rds")
+
+```
+
+
+**Perceived job insecurity** 
+\
+\
+This plot displays the percentage of SOEP participants with a regular employment between the age of 20 and 65 that are very concerned, somewhat concerned or not concerned about job loss. Self employed and civil servants are excluded from the analysis. 
+\
+\
+```{r jobLossOverTime, echo=FALSE,include=TRUE, warning=FALSE}
+
+df <- soep_data[soep_data$pgemplst %in% 1 &
+                  is.na(soep_data$plb0065) & 
+                  is.na(soep_data$plb0057_v3) &
+                  soep_data$age %in% c(20:65) & 
+                  !is.na(soep_data$plh0042),
+]
+
+
+#Get perceived job insecurity over time
+job_loss_high <- setNames(aggregate(df$plh0042, by = list(df$syear), function(x){sum(x==1)}),
+               c("syear", "high")
+)
+
+job_loss_mid <- setNames(aggregate(df$plh0042, by = list(df$syear), function(x){sum(x==2)}),
+               c("syear", "mid")
+)
+
+job_loss_low <- setNames(aggregate(df$plh0042, by = list(df$syear), function(x){sum(x==3)}),
+               c("syear", "low")
+)
+
+summary     <- merge(job_loss_high, job_loss_mid, by = c("syear"))
+summary     <- merge(summary, job_loss_low, by = c("syear"))
+total       <- summary$high + summary$mid + summary$low
+
+summary$high <- summary$high / total
+summary$mid  <- summary$mid  / total
+summary$low  <- summary$low  / total
+
+summary <- setNames(
+  melt(summary, id.vars = "syear", measure.vars = c("high", "mid", "low")),
+  c("syear", "Perceived job uncertainty", "Percentage"))
+
+# Basic line plot with points
+p <- ggplot(data=summary, aes(y=Percentage, x=syear, group=`Perceived job uncertainty`)) +
+  geom_line(aes(linetype=`Perceived job uncertainty`, color=`Perceived job uncertainty`))+
+  geom_point(aes(shape=`Perceived job uncertainty`, color=`Perceived job uncertainty`))
+p
+
+rm(summary)
+
+```
+
+\
+\
+This plot displays the percentage of Accountants and Non-Accountants with a regular employment between the age of 20 and 65 that are very concerned, somewhat concerned or not concerned about job loss. Self employed and civil servants are excluded from the analysis. 
+\
+\
+
+```{r jobLossOverTimeByJob, echo=FALSE, include=TRUE, warning=FALSE}
+
+df <- soep_data[soep_data$pgemplst %in% 1 &
+                  is.na(soep_data$plb0065) & 
+                  is.na(soep_data$plb0057_v3) &
+                  soep_data$age %in% c(20:65) & 
+                  !is.na(soep_data$plh0042),
+]
+
+accountant    <-  unique(df$pid[df$pgisco88 %in% 2411  | df$pgisco08 %in% 2411]) 
+df$accountant <-  df$pid %in% accountant
+
+#Get perceived job insecurity over time
+job_loss_high <- setNames(aggregate(df$plh0042, by = list(df$syear, df$accountant), function(x){sum(x==1)}),
+               c("syear","accountant", "high")
+)
+
+job_loss_mid <- setNames(aggregate(df$plh0042, by = list(df$syear, df$accountant), function(x){sum(x==2)}),
+               c("syear","accountant", "mid")
+)
+
+job_loss_low <- setNames(aggregate(df$plh0042, by = list(df$syear, df$accountant), function(x){sum(x==3)}),
+               c("syear","accountant", "low")
+)
+
+
+summary     <- merge(job_loss_high, job_loss_mid, by = c("syear", "accountant"))
+summary     <- merge(summary, job_loss_low, by = c("syear", "accountant"))
+total       <- summary$high + summary$mid + summary$low
+
+summary$high <- summary$high / total
+summary$mid  <- summary$mid  / total
+summary$low  <- summary$low  / total
+
+summary <- setNames(
+  melt(summary, id.vars = c("syear","accountant"), measure.vars = c("high", "mid", "low")),
+  c("syear","Accountant", "Perceived job uncertainty", "Percentage"))
+
+
+
+p <- ggplot(data=summary, aes(y=Percentage, x=syear, colour = `Perceived job uncertainty`, shape = Accountant,
+  group=interaction(`Perceived job uncertainty`, Accountant))) + 
+  geom_point() + geom_line()
+
+p
+```
+
+
+**Actual job losses** 
+\
+\
+This plot displays the percentage of individuals losing their job due to plant closure or termination of contract by employer. It is based on individuals with a regular employment between the age of 20 and 65. Self employed and civil servants are excluded from the analysis. 
+\
+Note: Accountants and Professionals are defined as individuals that work in that area at least once.
+\
+
+```{r actjobLossOverTimeByJob_1, echo=FALSE, include=TRUE, warning=FALSE}
+
+df <- soep_data[soep_data$pgemplst %in% 1 &
+                  soep_data$syear %in% (2001:2020) &
+                  is.na(soep_data$plb0065) & 
+                  is.na(soep_data$plb0057_v3) &
+                  soep_data$age %in% c(20:65) & 
+                  !is.na(soep_data$plh0042),
+]
+
+#Get Accountants
+accountant    <-  unique(df$pid[df$pgisco88 %in% 2411  | df$pgisco08 %in% 2411]) 
+
+#Get Professionals
+professional    <-  unique(df$pid[substr(df$pgisco88,1,1) %in% 2  | substr(df$pgisco08,1,1) %in% 2]) 
+
+#Assign groups 
+df$job_group  <- ifelse(df$pid %in% accountant,
+                        "Accountant",
+                        ifelse(df$pid %in% professional,
+                               "Professional","Other"))
+
+
+
+#Get people losing their job
+df$job_loss   <- df$plb0304_v14 %in% c(1,3)
+
+#Number of people in each job group by year
+individuals_by_group <- setNames(aggregate(df$pid, by = list(df$syear, df$job_group), length),
+               c("syear","ISCO Group", "n")
+)
+
+
+job_losses_by_group <- setNames(aggregate(df$job_loss, by = list(df$syear, df$job_group), sum),
+               c("syear","ISCO Group", "Job Losses")
+)
+
+
+
+#Calculate percentage of job losses
+summary       <- merge(individuals_by_group, job_losses_by_group, by = c("syear", "ISCO Group"))
+summary$share <- summary$`Job Losses` / summary$n
+
+
+
+p <- ggplot(data=summary, aes(y=share, x=syear, colour = `ISCO Group`)) + 
+  geom_point() +
+  geom_line()
+
+p
+```
+
+\
+```{r actjobLossOverTimeByJob_2, echo=FALSE, include=FALSE, warning=FALSE}
+
+df <- soep_data[soep_data$pgemplst %in% 1 &
+                  soep_data$syear %in% (2001:2020) &
+                  is.na(soep_data$plb0065) & 
+                  is.na(soep_data$plb0057_v3) &
+                  soep_data$age %in% c(20:65) & 
+                  !is.na(soep_data$plh0042),
+]
+
+#Get job groups
+df$job_group  <- ifelse(is.na(df$pgisco88),
+                        substr(df$pgisco08,1,1),
+                        substr(df$pgisco88,1,1)) 
+
+#Get people losing their job
+df$job_loss   <- df$plb0304_v14 %in% c(1,3)
+
+#Number of people in each job group by year
+individuals_by_group <- setNames(aggregate(df$pid, by = list(df$syear, df$job_group), length),
+               c("syear","ISCO Group", "n")
+)
+
+
+job_losses_by_group <- setNames(aggregate(df$job_loss, by = list(df$syear, df$job_group), sum),
+               c("syear","ISCO Group", "Job Losses")
+)
+
+
+#Calculate percentage of job losses
+summary       <- merge(individuals_by_group, job_losses_by_group, by = c("syear", "ISCO Group"))
+summary$share <- summary$`Job Losses` / summary$n
+
+
+
+p <- ggplot(data=summary, aes(y=share, x=syear, colour = `ISCO Group`)) + 
+  geom_point() +
+  geom_line()
+
+p
+
+```
+
+**Risk of job losses vs. actual job losses** 
+\
+\
+Share of individuals indicating a high or moderate risk of unemployment in 2015 versus share of individuals actually losing their job in the next five years. Based on individuals with observations for 2015-2020.
+\
+Note: Job groups are based on values in 2015.
+\
+
+
+
+```{r prepData, echo=FALSE, include=FALSE, warning=FALSE}
+
+df <- soep_data[soep_data$pgemplst %in% 1 &
+                  soep_data$syear %in% (2015:2020) &
+                  is.na(soep_data$plb0065) & 
+                  is.na(soep_data$plb0057_v3) &
+                  soep_data$age %in% c(20:65) & 
+                  !is.na(soep_data$plh0042),
+]
+
+#Delete all participants that are not part of the sample for the full period
+bads <- aggregate(df$pid, by = list(df$pid), length)
+bads <- bads$Group.1[bads$x < 6]
+df   <- df[!df$pid %in% bads,]
+
+#Get job groups
+d           <- df[df$syear %in% 2015, c("pid","pgisco08", "pgisco88", "plh0042" )]
+d$job_loss  <- FALSE
+
+#Losing job over next five years?
+for(i in 1:length(d$pid)){
+  curr.data  <- df$plb0304_v14[df$pid %in% d$pid[i] & df$syear %in% c(2016:2020)]
+  if(2 %in% curr.data | 3 %in% curr.data ){
+    d$job_loss[i] <- TRUE
+  }
+}
+
+
+
+#Assign groups
+d$job_id    <- ifelse(is.na(d$pgisco88),
+                        d$pgisco08,
+                        d$pgisco88)
+
+d$job_group  <- ifelse(d$job_id %in% 2411,
+                        "Accountants",
+                        substr(d$job_id,1,1))
+
+
+```
+
+```{r predictedJobLossPlot, echo=FALSE, include=TRUE, warning=FALSE}
+
+#Share of people with high perceived risk of job loss
+
+perc_job_loss <- setNames(
+  aggregate(d$plh0042, by = list(d$job_group), function(x){sum(x==1)}),
+  c("Job Group", "High Perceived Risk"))
+
+actual_job_loss <- setNames(
+  aggregate(d$job_loss, by = list(d$job_group), sum),
+  c("Job Group", "Actual Job Losses"))
+
+n <-  setNames(
+  aggregate(d$pid, by = list(d$job_group), length),
+  c("Job Group", "n"))
+
+
+
+summary     <- merge(n, perc_job_loss, by = c("Job Group"))
+summary     <- merge(summary, actual_job_loss, by = c("Job Group"))
+
+summary$`High Perceived Risk` <- summary$`High Perceived Risk` / summary$n
+summary$`Actual Job Losses`   <- summary$`Actual Job Losses` /summary$n
+
+p <- ggplot(summary, aes(x=`High Perceived Risk`, y=`Actual Job Losses`)) +
+  geom_point() + 
+  geom_text(aes(label=summary$`Job Group`),
+    size = 4,
+    hjust = 0,
+    position = position_nudge(x = 0.002, y = -0.002))
+p
+
+
+```
+
+**Perceived job security vs. other worries** 
+\ 
+\
+The full questionnaire can be found here (page 95): https://www.diw.de/documents/publikationen/73/diw_01.c.824201.de/diw_ssp1024.pdf
+
+The plot displays the percentage of individuals with high worries in the respective category.
+```{r comparisonAll, echo=FALSE, include=TRUE, warning=FALSE}
+
+df <- soep_data[soep_data$pgemplst %in% 1 &
+                  soep_data$syear %in% (2001:2020) &
+                  is.na(soep_data$plb0065) & 
+                  is.na(soep_data$plb0057_v3) &
+                  soep_data$age %in% c(20:65) & 
+                  !is.na(soep_data$plh0042),
+]
+
+#Get total number
+n <- setNames(aggregate(df$pid, by = list(df$syear), length),
+               c("syear","n")
+)
+
+
+#Get perceived high insecurity over time
+
+gen_econ_high <- setNames(aggregate(df$plh0032, by = list(df$syear), function(x){sum(x %in% 1)}),
+               c("syear","General Economy")
+)
+
+own_econ_high <- setNames(aggregate(df$plh0033, by = list(df$syear), function(x){sum(x %in% 1)}),
+               c("syear","Own Econ. Situation")
+)
+
+pension_high <- setNames(aggregate(df$plh0335, by = list(df$syear), function(x){sum(x %in% 1)}),
+               c("syear","Pension")
+)
+
+
+health_high <- setNames(aggregate(df$plh0035, by = list(df$syear), function(x){sum(x %in% 1)}),
+               c("syear","Health")
+)
+
+
+enviroment_high <- setNames(aggregate(df$plh0036, by = list(df$syear), function(x){sum(x %in% 1)}),
+               c("syear","Enviroment")
+)
+
+climate_high <- setNames(aggregate(df$plh0037, by = list(df$syear), function(x){sum(x %in% 1)}),
+               c("syear","Climate")
+)
+
+
+peace_high <- setNames(aggregate(df$plh0038, by = list(df$syear), function(x){sum(x %in% 1)}),
+               c("syear","Peace")
+)
+
+crime_high <- setNames(aggregate(df$plh0040, by = list(df$syear), function(x){sum(x %in% 1)}),
+               c("syear","Crime")
+)
+
+social_cohesion_high <- setNames(aggregate(df$plh0336, by = list(df$syear), function(x){sum(x %in% 1)}),
+               c("syear","Social Cohesion")
+)
+
+financial_markets_high <- setNames(aggregate(df$plh0034, by = list(df$syear), function(x){sum(x %in% 1)}),
+               c("syear","Financial Markets")
+)
+
+migration_high <- setNames(aggregate(df$plj0046, by = list(df$syear), function(x){sum(x %in% 1)}),
+               c("syear","Migration")
+)
+
+xenophobia_high <- setNames(aggregate(df$plh0336, by = list(df$syear), function(x){sum(x %in% 1)}),
+               c("syear","Xenophobia")
+)
+
+job_loss_high <- setNames(aggregate(df$plh0042, by = list(df$syear), function(x){sum(x %in% 1)}),
+               c("syear","Job Loss")
+)
+
+summary     <- merge(gen_econ_high, own_econ_high, by = c("syear"))
+summary     <- merge(summary, pension_high, by = c("syear"))
+summary     <- merge(summary, health_high, by = c("syear"))
+summary     <- merge(summary, enviroment_high, by = c("syear"))
+summary     <- merge(summary, climate_high, by = c("syear"))
+summary     <- merge(summary, peace_high, by = c("syear"))
+summary     <- merge(summary, crime_high, by = c("syear"))
+summary     <- merge(summary, social_cohesion_high, by = c("syear"))
+summary     <- merge(summary, financial_markets_high, by = c("syear"))
+summary     <- merge(summary, migration_high, by = c("syear"))
+summary     <- merge(summary, xenophobia_high, by = c("syear"))
+summary     <- merge(summary, job_loss_high, by = c("syear"))
+
+summary[,c(2:14)] <- summary[,c(2:14)] / n$n
+
+summary[summary == 0] <- NA
+
+
+
+
+#Plot
+summary <-  melt(summary, id.vars = "syear" )
+
+
+p <- ggplot(data=summary, aes(y=value, x=syear, colour = variable)) + 
+  geom_point() +
+  geom_line()
+
+p
+
+
+```
+
+
+
+
+**Perceived job security vs. preceding two questions** 
+The preceding questions are related to xenophobia and migration. The correlations are `r cor(summary$value[summary$variable %in% "Job Loss"], summary$value[summary$variable %in% "Xenophobia"], use = "complete.obs")` and `r cor(summary$value[summary$variable %in% "Job Loss"], summary$value[summary$variable %in% "Migration"], use = "complete.obs")`. 
+
+```{r comparisonPrece, echo=FALSE, include=TRUE, warning=FALSE}
+
+summary <- summary[summary$variable %in% c("Job Loss", "Migration", "Xenophobia"),]
+
+
+p <- ggplot(data=summary, aes(y=value, x=syear, colour = variable)) + 
+  geom_point() +
+  geom_line()
+
+p
+
+
+
+
+```

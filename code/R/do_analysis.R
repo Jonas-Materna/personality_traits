@@ -2,6 +2,7 @@ library(ExPanDaR)
 library(ggplot2)
 library(tidyr)
 library(ggpubr)
+library(reshape2)
 # Load data
 soep_data <- readRDS("data/generated/soep_data.rds")
 

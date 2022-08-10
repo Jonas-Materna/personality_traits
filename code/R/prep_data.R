@@ -20,6 +20,9 @@ pgen <- read_dta(paste0("data/soep/pgen.dta"), col_select=c("pid",
                                                             #Nationality
                                                             "pgnation",
                                                             
+                                                            #Unemployment experience
+                                                            "pgexpue",
+                                                            
                                                             #Job indicators
                                                             "pgisco88",
                                                             "pgisco08",
@@ -48,6 +51,40 @@ pl  <- read_dta(paste0("data/soep/pl.dta"), col_select=c("pid",
                                                          #Gender variables
                                                          "pla0009_v2",
                                                          "pla0009_v3",
+                                                         
+                                                         #Reason of job loss
+                                                         "plb0304_v14",
+                                                         
+                                                         #Self employed
+                                                         "plb0057_v3",
+                                                         
+                                                         #Civil servants
+                                                         "plb0065",
+                                                         
+                                                         #Political opinion,
+                                                         "plh0004",
+                                                         
+                                                         #Positionin job
+                                                         "plb0064_v1",
+                                                         "plb0064_v2",
+                                                         "plb0064_v4",
+                                                         
+                                                         
+                                                         #Measures of worries
+                                                         "plh0032",
+                                                         "plh0033",
+                                                         "plh0335",
+                                                         "plh0335",
+                                                         "plh0035",
+                                                         "plh0036",
+                                                         "plh0037",
+                                                         "plh0038",
+                                                         "plh0040",
+                                                         "plh0336", 
+                                                         "plh0034",
+                                                         "plj0046",
+                                                         "plj0047",
+                                                         "plh0042",
                                                          
                                                          #Big 5 questions
                                                          "plh0212", 
@@ -91,7 +128,14 @@ pl  <- read_dta(paste0("data/soep/pl.dta"), col_select=c("pid",
                                                          "plh0185",
                                                          "plh0186",
                                                          "plh0187",
-                                                         "plh0190"))
+                                                         "plh0190",
+                                                         
+                                                         #Self-employed
+                                                         "plb0057_h1",
+                                                         "plb0057_h2",
+                                                         "plb0049_v6",
+                                                         "plb0047",
+                                                         "plb0046"))
 
 
 
@@ -100,17 +144,21 @@ ppathl  <- read_dta(paste0("data/soep/ppathl.dta"), col_select=c("pid",
                                                                  "phrf"))
 
 
+gripstr <- read_dta(paste0("data/soep/gripstr.dta"))
+
 
 # Merge data
-df         <- merge(pgen, pl, by = c("pid", "syear"), all = F)
-df         <- merge(df, biojob, by = c("pid"), all = F)
-df         <- merge(df, biobirth, by = c("pid"), all = F)
-df         <- merge(df, ppathl, by = c("pid", "syear"), all = F)
+df         <- merge(pgen, pl, by = c("pid", "syear"), all.x = T)
+df         <- merge(df, biojob, by = c("pid"), all.x = T)
+df         <- merge(df, biobirth, by = c("pid"), all.x = T)
+df         <- merge(df, ppathl, by = c("pid", "syear"), all.x = T)
+df         <- merge(df, gripstr, by = c("pid", "syear"), all.x = T)
+
 
 # Do some basic cleaning
 df[df<0]   <- NA
 df <- data.frame(lapply(df, function(x) as.numeric(x)))
-rm(ppathl,pl,pgen,biobirth, biojob)
+rm(ppathl,pl,pgen,biobirth, biojob, gripstr)
 
 ## Calculate Big 5 personality traits
 
@@ -141,11 +189,19 @@ rm(ppathl,pl,pgen,biobirth, biojob)
 #Handles stress well:                   plh0226
 
 
-df$consc <- (df$plh0212 + (8-df$plh0218) + df$plh0222 + df$plh0255) / 4
-df$extra <- (df$plh0213 + df$plh0219 + (8-df$plh0223)) / 3
-df$agree <- ((8-df$plh0214) + df$plh0217 + df$plh0224) / 3
-df$openn <- (df$plh0215 + df$plh0220 + df$plh0225) / 3
-df$neuro <- (df$plh0216 + df$plh0221 + (8-df$plh0226)) / 3
+
+#Change signs questions with negative effect
+df$plh0218 <- (8-df$plh0218)
+df$plh0223 <- (8-df$plh0223)
+df$plh0214 <- (8-df$plh0214)
+df$plh0226 <- (8-df$plh0226)
+
+#Calculate big 5
+df$consc <- apply(data.frame(df$plh0212, df$plh0218, df$plh0222, df$plh0255),1,mean,na.rm=TRUE)
+df$extra <- apply(data.frame(df$plh0213, df$plh0219, df$plh0223),1,mean,na.rm=TRUE)
+df$agree <- apply(data.frame(df$plh0214, df$plh0217, df$plh0224),1,mean,na.rm=TRUE)
+df$openn <- apply(data.frame(df$plh0215, df$plh0220, df$plh0225),1,mean,na.rm=TRUE)
+df$neuro <- apply(data.frame(df$plh0216, df$plh0221, df$plh0226),1,mean,na.rm=TRUE)
 
 
 # Get gender
